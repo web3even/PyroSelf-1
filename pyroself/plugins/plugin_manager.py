@@ -13,7 +13,7 @@ __help__ = f"""
 نصب پلاگین
 `{COMMAND_HAND_LER}installpl` ریپلای روی پلاگین
 حذف کردن پلاگین
-`{COMMAND_HAND_LER}delpl نام پلاگین
+`{COMMAND_HAND_LER}delpl` نام پلاگین
 """
 
 
