@@ -1,4 +1,4 @@
-from pyrobot.sample_config import Config
+from pyroself.sample_config import Config
 
 class Development(Config):
   APP_ID = 1473647
