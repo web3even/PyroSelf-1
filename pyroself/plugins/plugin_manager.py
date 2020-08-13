@@ -1,5 +1,6 @@
 from os import execl, path, remove
 from sys import executable
+import os
 from pyrogram import Client, Filters
 from pyroself import COMMAND_HAND_LER
 from pyroself.plugins import ALL_PLUGINS
