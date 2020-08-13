@@ -16,8 +16,8 @@ class PyroBot(Client):
 
         super().__init__(
             HU_STRING_SESSION,
-            plugins=dict(root=f"{name}/plugins"),
-            workdir=f"{name}/session",
+            plugins=dict(root=f"pyroself/plugins"),
+            workdir=f"pyroself/session",
             api_id=APP_ID,
             api_hash=API_HASH)
 
