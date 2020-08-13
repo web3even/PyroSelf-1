@@ -3,4 +3,4 @@ from pyroself.sample_config import Config
 class Development(Config):
   APP_ID = 1473647
   API_HASH = "6ff32a5d80fbe15415ce2abd46c138e2"
-  HU_STRING_SESSION = ""
+  HU_STRING_SESSION = "AQC3-9_GKIJnYbzckqlv6kVd3CmkUfq6pc1Hoym9RhBqNXMVcdg3tEw24HRTv7buq99r1LDVB6i46pwiu7z4LHFYxci38c2BPzw_Uvvk4XnG-ItPM-yUeBrhz6wuuxqs9iYNp4ahe5pvDJAViCPiDyN1yQ6PTylWcDRVEgqqTl5WL24hUsWviION0GZGXTmNGDBeXVTebzuGLV9U5UBLJLckv9DlgyQQeCBH-jQoQ371gYRrDPY-N0xdCWuAYbt1IRuQYkqXCXKNSlItfR8rGJSYSZVLQdAvsCZLsfMiv5_utDaapiFYr-k7ub6yuhXkvAS96P_sdUsrBNhVOHAHJjQIRKfsHwA"
