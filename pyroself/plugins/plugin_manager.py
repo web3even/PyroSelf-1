@@ -41,7 +41,7 @@ async def install_plugin(client, message):
         if message.reply_to_message.document.file_name.split(".")[-1] != "py":
             await message.edit("`Can only install python files!`")
             return
-        plugin_loc = f"/app/pyroself/plugins/{message.reply_to_message.document.file_name}"
+        plugin_loc = f"pyroself/plugins/{message.reply_to_message.document.file_name}"
         await message.edit("`Installing plugin...`")
         if os.path.exists(plugin_loc):
             await message.edit(f"`Plugin {message.reply_to_message.document.file_name} already exists!`")
