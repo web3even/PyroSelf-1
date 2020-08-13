@@ -1,5 +1,5 @@
 from pyrogram import Filters
-from pyrobot import SUDO_USERS, OWNER_ID
+from pyroself import SUDO_USERS, OWNER_ID
 
 def f_sudo_filter(f, m):
     return bool(
