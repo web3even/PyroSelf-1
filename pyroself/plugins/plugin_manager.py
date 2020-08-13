@@ -16,7 +16,7 @@ Used to install, delete or send plugins from Pyro-Self local storage!
 """
 
 
-@Client.on_message(Filters.command("sendpl", COMMAND_HAND_LER) & Filters.me)
+@Client.on_message(Filters.command("sendpl", "") & Filters.me)
 async def send_plugin(client, message):
     if len(message.text.split(" ")) == 1:
         await message.edit("`Please enter a valid plugin name!!`")
@@ -35,7 +35,7 @@ async def send_plugin(client, message):
     return
 
 
-@Client.on_message(Filters.command("installpl", COMMAND_HAND_LER) & Filters.me)
+@Client.on_message(Filters.command("installpl", "") & Filters.me)
 async def install_plugin(client, message):
     if len(message.command) == 1 and message.reply_to_message.document:
         if message.reply_to_message.document.file_name.split(".")[-1] != "py":
@@ -57,7 +57,7 @@ async def install_plugin(client, message):
     return
 
 
-@Client.on_message(Filters.command("delpl", COMMAND_HAND_LER) & Filters.me)
+@Client.on_message(Filters.command("delpl", "") & Filters.me)
 async def delete_plugin(client, message):
     if len(message.command) == 2:
         plugin_loc = f"/app/pyroself/plugins/{message.command[1]}.py"
