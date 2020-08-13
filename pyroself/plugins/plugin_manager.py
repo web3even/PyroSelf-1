@@ -7,28 +7,28 @@ from pyroself.utils.pyrohelpers import ReplyCheck
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
 
 __help__ = f"""
-Used to install, delete or send plugins from Pyro-Self local storage!
+راهنمای کار با پلاگین : **plugin_manager**
 
-**Usage**
-`{COMMAND_HAND_LER}sendpl <plugin name>` to send a plugin
-`{COMMAND_HAND_LER}installpl` as a reply to a valid plugin
-`{COMMAND_HAND_LER}delpl <plugin name>` to delete a plugin
+
+`{COMMAND_HAND_LER}sendpl <نام پلاگین>` برای دریافت پلاگین
+`{COMMAND_HAND_LER}installpl` با ریپلای کردن روی پلاگین ان را نصب کنید
+`{COMMAND_HAND_LER}delpl <نام پلاگین>` حذف کردن پلاگین
 """
 
 
 @Client.on_message(Filters.command("sendpl", COMMAND_HAND_LER) & Filters.me)
 async def send_plugin(client, message):
     if len(message.text.split(" ")) == 1:
-        await message.edit("`Please enter a valid plugin name!!`")
+        await message.edit("`دستور وارد شده اشتباه است!!`")
         return
-    await message.edit("`Sending plugin...`")
+    await message.edit("`در حال ارسال پلاگین...`")
     plugin_name = message.text.split(" ",1)[1]
     if plugin_name not in ALL_PLUGINS:
-        await message.edit(f"Please enter a valid plugin name!\nCheck availabe plugins by `{COMMAND_HAND_LER}plugins`.")
+        await message.edit(f"نام پلاگین وارد شده اشتباه است!\nبا ارسال دستور `{COMMAND_HAND_LER}plugins`. لیست پلاگین های خود را ببینید!")
         return
     await message.reply_document(
                 document=f"/app/pyroself/plugins/{plugin_name}.py",
-                caption=f"**Plugin:** `{plugin_name}.py`\n**Plugin for** @PiniGerTeam",
+                caption=f"**پلاگین :** `{plugin_name}.py`",
                 disable_notification=True,
                 reply_to_message_id=ReplyCheck(message))
     await message.delete()
@@ -39,21 +39,21 @@ async def send_plugin(client, message):
 async def install_plugin(client, message):
     if len(message.command) == 1 and message.reply_to_message.document:
         if message.reply_to_message.document.file_name.split(".")[-1] != "py":
-            await message.edit("`Can only install python files!`")
+            await message.edit("`فقط میتوانید فایل های پایتون نصب کنید!!!`")
             return
-        plugin_loc = f"pyroself/plugins/{message.reply_to_message.document.file_name}"
-        await message.edit("`Installing plugin...`")
+        plugin_loc = f"/app/pyroself/plugins/{message.reply_to_message.document.file_name}"
+        await message.edit("`در حال نصب پلاگین...`")
         if os.path.exists(plugin_loc):
-            await message.edit(f"`Plugin {message.reply_to_message.document.file_name} already exists!`")
+            await message.edit(f"`پلاگین {message.reply_to_message.document.file_name} از قبل نصب شده بود!!`")
             return
         try:
             plugin_dl_loc = await client.download_media(
                 message=message.reply_to_message,
                 file_name=plugin_loc)
             if plugin_dl_loc:
-                await message.edit(f"**Installed plugin:** {message.reply_to_message.document.file_name}")
+                await message.edit(f"**پلاگین مورد نظر نصب شد :** {message.reply_to_message.document.file_name}")
         except Exception as e_f:
-            await message.edit(f"**Error:**\n`{e_f}`")
+            await message.edit(f"**خطا:**\n`{e_f}`")
     return
 
 
@@ -63,9 +63,9 @@ async def delete_plugin(client, message):
         plugin_loc = f"/app/pyroself/plugins/{message.command[1]}.py"
         if os.path.exists(plugin_loc):
             os.remove(plugin_loc)
-            await message.edit(f"**Deleted plugin:** {message.command[1]}")
+            await message.edit(f"**پلاگین مورد نظر حذف شد:** {message.command[1]}")
             return
-        await message.edit("`Plugin does not exist!`")
+        await message.edit("`چنین پلاگینی وجود ندارد!!`")
         return
-    await message.edit("`Enter a valid plugin name!`")
+    await message.edit("`دستور وارد شده اشتباه است!!`")
     return

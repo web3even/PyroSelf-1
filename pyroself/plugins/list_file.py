@@ -25,7 +25,7 @@ async def list_directories(_, message):
         location = message.text.split(" ",1)[1]
         cmd = "ls " + location
     else:
-        await message.edit("<b>Error:</b>\n<i>Check Help documentaion for Help</i>")
+        await message.edit("<b>خطا:</b>\n<i>لطفا راهنمای ربات چک کنید!</i>")
 
     reply_to_id = message.message_id
 
