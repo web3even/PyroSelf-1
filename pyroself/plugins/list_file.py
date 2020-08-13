@@ -12,9 +12,9 @@ from pyroself import MAX_MESSAGE_LENGTH, COMMAND_HAND_LER
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
 
 __help__ = f"""
-List the directories of the server.
-`{COMMAND_HAND_LER}ls`: List files in ./ directory
-`{COMMAND_HAND_LER}ls <diectory name>`: List all the files in the directory.
+دریافت فایل ها و فولدر های سرور
+`{COMMAND_HAND_LER}ls`
+`{COMMAND_HAND_LER}ls نام فولدر
 """
 
 @Client.on_message(Filters.command("ls", COMMAND_HAND_LER) & Filters.me)

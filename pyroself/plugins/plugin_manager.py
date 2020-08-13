@@ -7,12 +7,13 @@ from pyroself.utils.pyrohelpers import ReplyCheck
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
 
 __help__ = f"""
-راهنمای کار با پلاگین : **plugin_manager**
 
-
-`{COMMAND_HAND_LER}sendpl <نام پلاگین>` برای دریافت پلاگین
-`{COMMAND_HAND_LER}installpl` با ریپلای کردن روی پلاگین ان را نصب کنید
-`{COMMAND_HAND_LER}delpl <نام پلاگین>` حذف کردن پلاگین
+برای ارسال پلاگین
+`{COMMAND_HAND_LER}sendpl` نام پلاگین
+نصب پلاگین
+`{COMMAND_HAND_LER}installpl` ریپلای روی پلاگین
+حذف کردن پلاگین
+`{COMMAND_HAND_LER}delpl نام پلاگین
 """
 
 
