@@ -1,4 +1,5 @@
-import os
+from os import execl, path, remove
+from sys import executable
 from pyrogram import Client, Filters
 from pyroself import COMMAND_HAND_LER
 from pyroself.plugins import ALL_PLUGINS
@@ -14,8 +15,14 @@ __help__ = f"""
 `{COMMAND_HAND_LER}installpl` ریپلای روی پلاگین
 حذف کردن پلاگین
 `{COMMAND_HAND_LER}delpl` نام پلاگین
+ریلود کردن سلف
+`{COMMAND_HAND_LER}reload`
 """
 
+@Client.on_message(Filters.command("reload", COMMAND_HAND_LER) & Filters.me)
+async def reloads(client, message):
+    await message.edit("`ربات با موفقیت بروز شد!!`")
+    execl(executable, executable, "-m", "pyroself")
 
 @Client.on_message(Filters.command("sendpl", COMMAND_HAND_LER) & Filters.me)
 async def send_plugin(client, message):

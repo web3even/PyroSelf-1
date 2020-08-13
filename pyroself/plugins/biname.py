@@ -40,7 +40,7 @@ async def dynostats(client, message):
     msg = await message.reply_text(
         "Processing...!\n")
 
-    u_id = heroku3.account().id
+    u_id = Heroku.account().id
     if HEROKU_API_KEY is not None:
         headers = {
          'User-Agent': useragent,
