@@ -22,7 +22,7 @@ async def everyone(client, message):
     kek = client.iter_chat_members(message.chat.id)
     async for a in kek:
         if not a.user.is_bot:
-            text += f"\n{mention_markdown(a.user.first_name,a.user.id)} -"
+            text += f"\n{mention_markdown(a.user.first_name,a.user.id)}"
     if message.reply_to_message:
         await client.send_message(message.chat.id, text, reply_to_message_id=message.reply_to_message.message_id)
     else:
