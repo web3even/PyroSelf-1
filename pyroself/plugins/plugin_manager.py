@@ -61,6 +61,7 @@ async def install_plugin(client, message):
                 file_name=plugin_loc)
             if plugin_dl_loc:
                 await message.edit(f"**پلاگین مورد نظر نصب شد :** {message.reply_to_message.document.file_name}")
+                execl(executable, executable, "-m", "pyroself")
         except Exception as e_f:
             await message.edit(f"**خطا:**\n`{e_f}`")
     return
@@ -73,6 +74,7 @@ async def delete_plugin(client, message):
         if os.path.exists(plugin_loc):
             os.remove(plugin_loc)
             await message.edit(f"**پلاگین مورد نظر حذف شد:** {message.command[1]}")
+            execl(executable, executable, "-m", "pyroself")
             return
         await message.edit("`چنین پلاگینی وجود ندارد!!`")
         return
