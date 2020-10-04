@@ -19,6 +19,7 @@ __help__ = f"""
 async def ping(client, message):
     start_t = time.time()
     #rm = await message.edit("Pinging...")
+    await sendmsg(message, text="Pinging...")
     end_t = time.time()
     time_taken_s = (end_t - start_t) * 1000
     #await message.edit(f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms")
