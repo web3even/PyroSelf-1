@@ -4,7 +4,6 @@ from pyrogram import Client, Filters, __version__
 from pyroself import COMMAND_HAND_LER
 from pyrogram.api.all import layer
 from pyroself.utils.sendmsg import sendmsg
-sudolist = [281795085,1151855647]
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
 
 __help__ = f"""
@@ -15,15 +14,14 @@ __help__ = f"""
 `{COMMAND_HAND_LER}json`
 """
 
-@Client.on_message(Filters.command("ping", COMMAND_HAND_LER) & Filters.user(sudolist))
+@Client.on_message(Filters.command("ping", COMMAND_HAND_LER) & Filters.me)
 async def ping(client, message):
     start_t = time.time()
-    #rm = await message.edit("Pinging...")
-    await sendmsg(message, text="Pinging...")
+    rm = await message.edit("Pinging...")
     end_t = time.time()
     time_taken_s = (end_t - start_t) * 1000
-    #await message.edit(f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms")
-    await sendmsg(message, text=f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms",parse_mode="html")
+    await message.edit(f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms")
+  
 
 
 
