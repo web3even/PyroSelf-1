@@ -22,7 +22,7 @@ async def ping(client, message):
     end_t = time.time()
     time_taken_s = (end_t - start_t) * 1000
     #await message.edit(f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms")
-    await sendmsg(message, text=f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms",)
+    await sendmsg(message, text=f"**Pong!**\n<u>{time_taken_s:.3f}</u> ms",parse_mode="html")
 
 
 
