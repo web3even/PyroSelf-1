@@ -2,8 +2,8 @@ import os
 
 class Config():
     LOGGER = True
-    APP_ID = int(os.environ.get("APP_ID", 1473647))
-    API_HASH = os.environ.get("API_HASH", "6ff32a5d80fbe15415ce2abd46c138e2")
+    APP_ID = int(os.environ.get("APP_ID", 1891006))
+    API_HASH = os.environ.get("API_HASH", "544212aa9f34df3883da6cc0fdc9aed1")
     HU_STRING_SESSION = os.environ.get("HU_STRING_SESSION", None)
     MAX_MESSAGE_LENGTH = 4096
     COMMAND_HAND_LER = os.environ.get("COMMAND_HAND_LER", "")
