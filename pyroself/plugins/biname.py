@@ -27,12 +27,13 @@ useragent = (
 @Client.on_message(Filters.command("restart", COMMAND_HAND_LER) & Filters.me)
 async def restart(client, message):
     if (HEROKU_API_KEY or HEROKU_APP_NAME) is None:
-        await message.edit("Please add `HEROKU_APP_NAME` or `HEROKU_API_KEY` in your Config Vars or file.")
+        eror = "خطایی رخ داده است: لطفا موارد خواسته شده رو بررسی کنید (HEROKU_APP_NAME | HEROKU_API_KEY)"
+        await message.edit(eror)
         return
     heroku_conn = heroku3.from_key(HEROKU_API_KEY)
-    telepyrobot_app = heroku_conn.apps()[HEROKU_APP_NAME]
-    await message.edit("Restarted...!")
-    telepyrobot_app.restart()
+    self_pyro = heroku_conn.apps()[HEROKU_APP_NAME]
+    await message.edit("ربات(سلف) با موفقیت ریلود شد...!")
+    self_pyro.restart()
     return
 
 @Client.on_message(Filters.command("dynostats", COMMAND_HAND_LER) & Filters.me)
