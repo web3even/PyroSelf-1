@@ -8,11 +8,6 @@ from pyroself.utils.database import db
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
 
 __help__ = f"""
-
-دریافت انلاینی ربات
-`{COMMAND_HAND_LER}ping`
-دریافت اپدیت مسیج
-`{COMMAND_HAND_LER}json`
 """
 
 
