@@ -53,7 +53,7 @@ async def mme(client, message):
 
 
 
-@Client.on_message(Filters.command('tti', COMMAND_HAND_LER) & filters.me)
+@Client.on_message(Filters.command('tti', COMMAND_HAND_LER) & Filters.me)
 async def text_to_img(client, message):
     global tg_img
     text_color = message.command[1]
