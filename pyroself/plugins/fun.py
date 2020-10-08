@@ -73,3 +73,14 @@ async def text_to_img(client, message):
             await client.send_photo(message.chat.id, tg_img)
         else:
             await client.send_photo(message.chat.id, tg_img, reply_to_message_id=message.reply_to_message.message_id)
+
+
+@Client.on_message(Filters.command('webshot', COMMAND_HAND_LER) & Filters.me)
+async def webshot(client, message):
+    try:
+        user_link = message.command[1]
+        await message.delete()
+        full_link = f'https://webshot.deam.io/{user_link}/?delay=2000'
+        await client.send_document(message.chat.id, full_link, caption=f'{user_link}')
+    except:
+        await client.send_message(message.chat.id, '**خطایی رخ داده است...**')
