@@ -81,6 +81,6 @@ async def webshot(client, message):
         user_link = message.command[1]
         await message.delete()
         full_link = f'https://webshot.deam.io/{user_link}/?delay=2000'
-        await client.send_document(message.chat.id, full_link, caption=f'{user_link}')
+        await client.send_document(message.chat.id, full_link)
     except:
         await client.send_message(message.chat.id, '**خطایی رخ داده است...**')
