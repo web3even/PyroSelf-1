@@ -15,27 +15,23 @@ from pyroself import (
 
 # -- Constants -- #
 IS_SELECTED_DIFFERENT_BRANCH = (
-    "Looks like a custom branch {branch_name} "
-    "is being used\n"
-    "In this case, updater is unable to identify the branch to be updated."
-    "Please check out to an official branch, and re-start the updater.\n\n"
-    "Or join @PiniGerTeam for help!")
+    "به نظر میرسد مشکلی پیش اومده است برای رفع مشکل به پشتیبانی مراجعه کنید!! \n\n @PiniGerTeam")
 REPO_REMOTE_NAME = "official_remote"
 IFFUCI_ACTIVE_BRANCH_NAME = "master"
 DIFF_MARKER = "HEAD..{remote_name}/{branch_name}"
-NO_HEROKU_APP_CFGD = "no heroku application found, but a key given? 😕 "
+NO_HEROKU_APP_CFGD = "به نظر میرسد مشکلی پیش اومده است برای رفع مشکل به پشتیبانی مراجعه کنید!! \n\n @PiniGerTeam"
 HEROKU_GIT_REF_SPEC = "HEAD:refs/heads/master"
-NEW_BOT_UP_DATE_FOUND = "**NEW update found for** __{branch_name}__( {commit_link})\n**Chagelog:**\n\n`{changelog}`\n__**Updating...**__"
+NEW_BOT_UP_DATE_FOUND = "**بروزرسانی جدیدی برای ربات(سلف) یافت شد** __{branch_name}__( {commit_link})\n**تغییرات اعمال شده:**\n\n`{changelog}`\n__**در حال اپدیت...**__"
 NEW_UP_DATE_FOUND = "**NEW Update found for** __{branch_name}__\n__**Updating ...**__"
 # -- Constants End -- #
 
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
 
 __help__ = f"""
-**Update your Pyro-Self easily ✌️**
+**راهنمای اپدیت ربات(سلف) ✌️**
 
-`{COMMAND_HAND_LER}update`: Update Pyro-Self to latest version.
-`{COMMAND_HAND_LER}update force`: Forcefully update Pyro-Self to sync with latest remote source!
+`{COMMAND_HAND_LER}update`: اپدیت کردن ربات(سلف) به اخرین نسخه موجود.
+`{COMMAND_HAND_LER}update force`: اپدیت ربات(سلف) در صورت ضرورت!
 """
 
 @Client.on_message(Filters.command("update", COMMAND_HAND_LER) & Filters.me)
@@ -47,10 +43,10 @@ async def updater(client, message):
 
     umsg = await message.reply("`Checking for Update...`")
     if HEROKU_API_KEY is None or HEROKU_APP_NAME is None:
-        await umsg.edit("__Please the Vars__ `HEROKU_API_KEY` __and__ `HEROKU_APP_NAME` __properly!__")
+        await umsg.edit("**لطفا موارد خواسته شده را چک کنید** \n `HEROKU_API_KEY` | `HEROKU_APP_NAME` ")
         return
     if PRIVATE_GROUP_ID is None:
-        await umsg.edit("__**Please Set**__ `PRIVATE_GROUP_ID` **__to use updater!__**")
+        await umsg.edit("**لطفا موارد خواسته شده را چک کنید** \n `PRIVATE_GROUP_ID` ")
     try:
         repo = git.Repo()
     except git.exc.InvalidGitRepositoryError as error_one:
@@ -64,10 +60,7 @@ async def updater(client, message):
     active_branch_name = repo.active_branch.name
     LOGGER.info(active_branch_name)
     if active_branch_name != IFFUCI_ACTIVE_BRANCH_NAME:
-        await umsg.edit(IS_SELECTED_DIFFERENT_BRANCH.format(
-            branch_name=active_branch_name,
-            COMMAND_HAND_LER=COMMAND_HAND_LER
-        ))
+        await umsg.edit(IS_SELECTED_DIFFERENT_BRANCH.format(branch_name=active_branch_name,COMMAND_HAND_LER=COMMAND_HAND_LER))
         return
 
     try:
@@ -90,36 +83,24 @@ async def updater(client, message):
     except:
         commit_link = "None"
 
-    message_one = NEW_BOT_UP_DATE_FOUND.format(
-        branch_name=active_branch_name,
-        changelog=changelog,
-        commit_link=commit_link
-    )
-    message_two = NEW_UP_DATE_FOUND.format(
-        branch_name=active_branch_name
-    )
+    message_one = NEW_BOT_UP_DATE_FOUND.format(branch_name=active_branch_name,changelog=changelog,commit_link=commit_link)
+    message_two = NEW_UP_DATE_FOUND.format(branch_name=active_branch_name)
 
     if len(message_one) > MAX_MESSAGE_LENGTH:
         with open("change.log", "w+", encoding="utf8") as out_file:
             out_file.write(str(message_one))
-        await message.reply_document(
-            document="change.log",
-            caption=message_two,
-            disable_notification=True,
-            reply_to_message_id=message.message_id
-        )
+        await message.reply_document(document="change.log",caption=message_two,disable_notification=True,reply_to_message_id=message.message_id)
         os.remove("change.log")
 
     if not changelog and force_update == False:
-        await umsg.edit("`Your Pyro-Self is already up-to-date!!`")
+        await umsg.edit("**شما دارید از اخرین نسخه بروز شده ربات(سلف) استفاده میکنید!!**")
         return
 
-    await umsg.edit(message_one,
-        disable_web_page_preview=True)
+    await umsg.edit(message_one,disable_web_page_preview=True)
 
     if force_update == True:
-        await umsg.edit("**Force-Update initiated**\n`Fetching latest version and installing it...`")
-        changelog = "#ForceUpdate"
+        await umsg.edit("**...ربات(سلف) در حال بروزرسانی لطفا صبر کنید**")
+        changelog = "#اپدیت_فوری"
 
     temp_remote.fetch(active_branch_name)
     repo.git.reset("--hard", "FETCH_HEAD")
@@ -132,11 +113,8 @@ async def updater(client, message):
         remote.set_url(heroku_git_url)
     else:
         remote = repo.create_remote("heroku", heroku_git_url)
-    await umsg.reply(f"**Update Started**\n__**Type**__ `{COMMAND_HAND_LER}alive` **__to check if I'm alive__**\n\n**It would take upto 5 minutes to update!**")
-    await client.send_message(
-        PRIVATE_GROUP_ID,
-        f"#UPDATE\n\n**__Pyro-Self Update__** {commit_link}\n\n**Changelog:**\n{changelog}",
-        disable_web_page_preview=True)
+    await umsg.reply(f"**ربات(سلف) با موفقیت بروز رسانی شد!!**\nبرای ادامه دستور `{COMMAND_HAND_LER}ping` بزنید \n\n**لطفا 5دقیقه صبر کنید تا تمام تغییرات اعمال شوند...!**")
+    await client.send_message(message.chat.id,f"#اپدیت\n\n**__Pyro-Self__** {commit_link}\n\n**تغییرات اعمال شده:**\n{changelog}",disable_web_page_preview=True)
     remote.push(refspec=HEROKU_GIT_REF_SPEC, force=True)
     asyncio.get_event_loop().create_task(deploy_start(client))
 
