@@ -4,7 +4,6 @@ import git
 import shutil
 import heroku3
 from pyrogram import Client, Filters
-from pyroself.utils.cust_p_filters import sudo_filter
 from pyroself import (
     COMMAND_HAND_LER,
     HEROKU_API_KEY,
@@ -39,7 +38,7 @@ __help__ = f"""
 `{COMMAND_HAND_LER}update force`: Forcefully update Pyro-Self to sync with latest remote source!
 """
 
-@Client.on_message(Filters.command("update", COMMAND_HAND_LER) & sudo_filter)
+@Client.on_message(Filters.command("update", COMMAND_HAND_LER) & Filters.me)
 async def updater(client, message):
     if len(message.command) == 2 and message.command[1] == "force":
         force_update = True
