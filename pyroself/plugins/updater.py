@@ -41,7 +41,7 @@ async def updater(client, message):
     else:
         force_update = False
 
-    umsg = await message.reply("`Checking for Update...`")
+    umsg = await message.reply("**در حال چک کردن**...")
     if HEROKU_API_KEY is None or HEROKU_APP_NAME is None:
         await umsg.edit("**لطفا موارد خواسته شده را چک کنید** \n `HEROKU_API_KEY` | `HEROKU_APP_NAME` ")
         return
