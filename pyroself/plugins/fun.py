@@ -15,19 +15,19 @@ __help__ = f"""
 """
 
 @Client.on_message(Filters.command("kon","") & Filters.me)
-def kon(client, message):
-    message.delete()
+async def kon(client, message):
+    await message.delete()
     nsfw = requests.get("http://api.obutts.ru/noise/1").json()[0]["preview"]
     urllib.request.urlretrieve("http://media.obutts.ru/{}".format(nsfw), "*.jpg")
     os.rename("*.jpg", "kon.jpg")
-    client.send_photo(message.chat.id, "kon.jpg")
+    await client.send_photo(message.chat.id, "kon.jpg")
     os.remove("kon.jpg")
 
 @Client.on_message(Filters.command("mme","") & Filters.me)
-def mme(client, message):
-    message.delete()
+async def mme(client, message):
+    await message.delete()
     nsfw = requests.get("http://api.oboobs.ru/noise/1").json()[0]["preview"]
     urllib.request.urlretrieve("http://media.oboobs.ru/{}".format(nsfw), "*.jpg")
     os.rename("*.jpg", "mme.jpg")
-    client.send_photo(message.chat.id, "mme.jpg")
+    await client.send_photo(message.chat.id, "mme.jpg")
     os.remove("mme.jpg")
