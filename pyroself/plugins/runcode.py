@@ -6,7 +6,6 @@ import time
 import asyncio
 import requests
 from pyrogram import Client, Filters
-from pyroself.utils.cust_p_filters import sudo_filter
 from pyroself import MAX_MESSAGE_LENGTH, COMMAND_HAND_LER
 
 __PLUGIN__ = os.path.basename(__file__.replace(".py", ""))
@@ -18,9 +17,9 @@ __help__ = f"""
 """
 
 
-@Client.on_message(Filters.command(["eval", "py"], COMMAND_HAND_LER) & sudo_filter)
+@Client.on_message(Filters.command(["eval", "py"], COMMAND_HAND_LER) & Filters.me)
 async def eval(client, message):
-    status_message = await message.reply_text("`لطفا صبر کنید...`")
+    await message.edit("`لطفا صبر کنید...`")
     cmd = message.text.split(" ", maxsplit=1)[1]
 
     reply_to_id = message.message_id
@@ -68,9 +67,9 @@ async def eval(client, message):
             reply_to_message_id=reply_to_id
         )
         os.remove("eval.text")
-        await status_message.delete()
+        #await status_message.delete()
     else:
-        await status_message.edit(final_output)
+        await message.edit(final_output)
 
 
 async def aexec(code, client, message):
